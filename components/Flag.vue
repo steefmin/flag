@@ -1,17 +1,18 @@
 <template>
   <svg
     class="Flag"
-    :width="800"
-    :height="600"
+    :width="svgWidth"
+    :height="svgHeight"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g class="animated flag" stroke="#000000">
+    <g class="animated flag" stroke="none" >
       <path
-        class=" "
+        class="animated part"
         v-for="part in this.partsData"
         :d="part.pathData"
         :key="part.key"
         :fill="part.color"
+        :style="animationStyle"
       />
     </g>
   </svg>
@@ -29,8 +30,7 @@ export default {
         '#21468B'
       ],
       partHeight: 20,
-      startAnimationOffsetY: 20,
-      waveHeight: 50,
+      waveHeight: 3,
       waveLength: 200, // should not touch this, keep it 200
       aspectRatio: 0.666
     }
@@ -42,28 +42,29 @@ export default {
       const colors = this.parts
       const partHeight = this.partHeight
       const waveHeight = this.waveHeight
+      const animationOffsetY = this.waveHeight
       const curveLength = this.waveLength / 2
 
       function createPart (partNumber) {
         const nextNumber = partNumber + 1
         function createStartingPoint () {
-          return `M0,${partNumber * partHeight} `
+          return `M0,${partNumber * partHeight + animationOffsetY} `
         }
 
         function createPositiveDirection () {
           function getPathForDownDirection (a) {
             const path = []
-            path.push(`C${a * curveLength + curveLength * 0.36},${partNumber * partHeight},`)
-            path.push(`${a * curveLength + curveLength * 0.63},${waveHeight + partNumber * partHeight},`)
-            path.push(`${(a + 1) * curveLength},${waveHeight + partNumber * partHeight} `)
+            path.push(`C${a * curveLength + curveLength * 0.36},${partNumber * partHeight + animationOffsetY},`)
+            path.push(`${a * curveLength + curveLength * 0.63},${waveHeight + partNumber * partHeight + animationOffsetY},`)
+            path.push(`${(a + 1) * curveLength},${waveHeight + partNumber * partHeight + animationOffsetY} `)
             return path.join('')
           }
 
           function getPathForUpDirection (a) {
             const path = []
-            path.push(`C${a * curveLength + curveLength * 0.36},${partNumber * partHeight + waveHeight},`)
-            path.push(`${a * curveLength + curveLength * 0.63},${partNumber * partHeight},`)
-            path.push(`${(a + 1) * curveLength},${partNumber * partHeight} `)
+            path.push(`C${a * curveLength + curveLength * 0.36},${partNumber * partHeight + waveHeight + animationOffsetY},`)
+            path.push(`${a * curveLength + curveLength * 0.63},${partNumber * partHeight + animationOffsetY},`)
+            path.push(`${(a + 1) * curveLength},${partNumber * partHeight + animationOffsetY} `)
             return path.join('')
           }
 
@@ -87,10 +88,10 @@ export default {
 
         function createVertical () {
           if (paths % 2 === 0) {
-            return `L${paths * curveLength},${nextNumber * partHeight}`
+            return `L${paths * curveLength},${nextNumber * partHeight + animationOffsetY}`
           }
           if (paths % 2 === 1) {
-            return `L${paths * curveLength},${waveHeight + nextNumber * partHeight} `
+            return `L${paths * curveLength},${waveHeight + nextNumber * partHeight + animationOffsetY} `
           }
           throw new Error('Invalid direction')
         }
@@ -98,17 +99,17 @@ export default {
         function createNegativeDirection () {
           function getPathForUpDirection (a) {
             const path = []
-            path.push(`C${(a - 1) * curveLength + curveLength * 0.63},${nextNumber * partHeight + waveHeight},`)
-            path.push(`${(a - 1) * curveLength + curveLength * 0.36},${nextNumber * partHeight},`)
-            path.push(`${(a - 1) * curveLength},${nextNumber * partHeight} `)
+            path.push(`C${(a - 1) * curveLength + curveLength * 0.63},${nextNumber * partHeight + waveHeight + animationOffsetY},`)
+            path.push(`${(a - 1) * curveLength + curveLength * 0.36},${nextNumber * partHeight + animationOffsetY},`)
+            path.push(`${(a - 1) * curveLength},${nextNumber * partHeight + animationOffsetY} `)
             return path.join('')
           }
 
           function getPathForDownDirection (a) {
             const path = []
-            path.push(`C${(a - 1) * curveLength + curveLength * 0.63},${nextNumber * partHeight},`)
-            path.push(`${(a - 1) * curveLength + curveLength * 0.36},${waveHeight + nextNumber * partHeight},`)
-            path.push(`${(a - 1) * curveLength},${waveHeight + nextNumber * partHeight} `)
+            path.push(`C${(a - 1) * curveLength + curveLength * 0.63},${nextNumber * partHeight + animationOffsetY},`)
+            path.push(`${(a - 1) * curveLength + curveLength * 0.36},${waveHeight + nextNumber * partHeight + animationOffsetY},`)
+            path.push(`${(a - 1) * curveLength},${waveHeight + nextNumber * partHeight + animationOffsetY} `)
             return path.join('')
           }
 
@@ -156,7 +157,7 @@ export default {
       return parts
     },
     svgHeight: function () {
-      return 666 // todo: fix this
+      return this.flagHeight + 2 * this.waveHeight
     },
     svgWidth: function () {
       return this.flagWidth
@@ -170,8 +171,9 @@ export default {
     paths: function () {
       // amount of half waves we need to draw to allow for the animation
       // the animation can be cycled after one wavelength
-      return 48
-      return 2 + Math.trunc(this.flagWidth / this.waveLength) * 2
+      const visibleWaves = Math.ceil(this.flagWidth / this.waveLength)
+      const animationWaves = 1
+      return 2 * (visibleWaves + animationWaves)
     },
     animationStyle: function () {
       return {
@@ -185,35 +187,35 @@ export default {
 <style>
 .animated {
   animation-direction: normal;
-  animation-duration: 6s;
+  animation-duration: 200ms;
   animation-iteration-count: infinite;
   animation-delay: 0s;
   animation-fill-mode: forwards;
 }
 
 g {
-  /*animation: move-x linear;*/
+  animation: move-x linear;
 }
 
 path {
-  /*animation: move-y ease-in-out;*/
+  animation: move-y ease-in-out;
 }
 
 @keyframes move-x {
   from {
-    /*transform: translateX(-200px); !* one waveLength = 200px *!*/
+    transform: translateX(-200px); /* one waveLength = 200px */
   }
   to {
-    /*transform: translateX(0px);*/
+    transform: translateX(0px);
   }
 }
 
 @keyframes move-y {
   from, to {
-    /*transform: translateY(0px);*/
+    transform: translateY(0px);
   }
   50% {
-    /*transform: var(--waveheight-translation); !* one waveHeight *!*/
+    transform: var(--waveheight-translation); /* one waveHeight */
   }
 }
 </style>
