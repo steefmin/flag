@@ -1,22 +1,20 @@
 <template>
   <div class="container">
-    <div>
-      <FlagFigure/>
-    </div>
+    <FlagFigure state="Raised"/>
   </div>
 </template>
 
 <script>
-  import FlagFigure from "./FlagFigure";
+import FlagFigure from '../components/FlagFigure'
 
-  export default {
+export default {
   components: {
     FlagFigure
   }
 }
 </script>
 
-<style>
+<style scoped>
 .container {
   margin: 0 auto;
   min-height: 100vh;

@@ -33,7 +33,7 @@ export default {
       waveHeight: 20,
       waveLength: 200, // should not touch this, keep it 200
       aspectRatio: 0.666,
-      duration: 10000
+      duration: 6000
     }
   },
   computed: {
