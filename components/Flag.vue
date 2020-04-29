@@ -5,7 +5,7 @@
     :height="svgHeight"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g class="animated flag" stroke="none" >
+    <g class="animated flag" stroke="none" :style="animationStyle">
       <path
         class="animated part"
         v-for="part in this.partsData"
@@ -30,9 +30,10 @@ export default {
         '#21468B'
       ],
       partHeight: 20,
-      waveHeight: 3,
+      waveHeight: 20,
       waveLength: 200, // should not touch this, keep it 200
-      aspectRatio: 0.666
+      aspectRatio: 0.666,
+      duration: 10000
     }
   },
   computed: {
@@ -177,7 +178,8 @@ export default {
     },
     animationStyle: function () {
       return {
-        '--waveheight-translation': `translateY(-${this.waveHeight}px)`
+        '--waveheight-translation': `translateY(-${this.waveHeight}px)`,
+        '--animation-duration': `${this.duration}ms`
       }
     }
   }
@@ -185,9 +187,15 @@ export default {
 </script>
 
 <style>
+:root {
+  /* sane defaults, overwrite in component properties */
+  --animation-duration: 10000ms;
+  --waveheight-translation: 200px;
+}
+
 .animated {
   animation-direction: normal;
-  animation-duration: 200ms;
+  animation-duration: var(--animation-duration);
   animation-iteration-count: infinite;
   animation-delay: 0s;
   animation-fill-mode: forwards;
