@@ -30,8 +30,8 @@ export default {
     return {
       poleWidth: 10,
       poleColor: '#ffffff',
-      groundColor: '#f0557e',
-      skyColor: '#f28c54'
+      groundColor: '#96d65b',
+      skyColor: '#9af5f0'
     }
   }
 }
