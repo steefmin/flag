@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <FlagFigure state="Raised"/>
+    <FlagFigure :flag-state="state.flagState" :background="state.background"/>
+    <div id="description">
+      {{ description }}
+    </div>
   </div>
 </template>
 
@@ -10,6 +13,56 @@ import FlagFigure from '../components/FlagFigure'
 export default {
   components: {
     FlagFigure
+  },
+  data: function () {
+    return {
+      descriptions: {
+        sunDown: 'Er wordt niet gevlagd als de zon onder is.'
+      }
+    }
+  },
+  computed: {
+    state: function () {
+      if (this.sunDown) {
+        return {
+          flagState: 'Lowered',
+          background: 'night',
+          reason: 'sunDown'
+        }
+      }
+
+      return {
+        flagState: 'Raised',
+        background: 'day'
+      }
+    },
+    sunDown: function () {
+      const now = new Date()
+      const sunRise = new Date()
+      const sunSet = new Date()
+
+      sunRise.setHours(8)
+      sunRise.setMinutes(0)
+      sunSet.setHours(20)
+      sunSet.setMinutes(0)
+
+      if (now < sunRise) {
+        return true
+      }
+
+      if (now > sunSet) {
+        return true
+      }
+
+      return false
+    },
+    description: function () {
+      const reason = this.state.reason
+      if (reason) {
+        return this.descriptions[reason] || ''
+      }
+      return ''
+    }
   }
 }
 </script>
@@ -19,8 +72,13 @@ export default {
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+#description {
+  margin: 10px;
 }
 </style>

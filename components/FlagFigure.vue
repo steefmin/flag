@@ -1,6 +1,6 @@
 <template>
   <svg class="Figure" width="700" height="700" xmlns="http://www.w3.org/2000/svg">
-    <Pole id="pole"/>
+    <Pole id="pole" :nightTime="night"/>
     <Flag id="raisedFlag" class="flag" v-show="isRaised"/>
     <Flag id="halfRaisedFlag" class="flag" v-show="isHalfRaised" />
   </svg>
@@ -20,20 +20,24 @@ export default {
     Pole
   },
   props: {
-    state: {
+    flagState: {
       type: String,
-      required: true,
-      validator: function (value) {
-        return [raisedState, halfRaisedState]
-      }
+      required: true
+    },
+    background: {
+      type: String,
+      default: 'day'
     }
   },
   computed: {
     isRaised: function () {
-      return this.state === raisedState
+      return this.flagState === raisedState
     },
     isHalfRaised: function () {
-      return this.state === halfRaisedState
+      return this.flagState === halfRaisedState
+    },
+    night: function () {
+      return this.background === 'night'
     }
   }
 }
