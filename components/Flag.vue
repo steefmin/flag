@@ -1,12 +1,12 @@
 <template>
   <g>
     <defs>
-      <clipPath id="clipPath">
-        <rect x="0" y="0" :width="svgWidth" :height="svgHeight" />
+      <clipPath :id="clipPathId">
+        <rect x="0" y="0" :width="clipWidth" :height="clipHeight" />
       </clipPath>
     </defs>
 
-    <g id="flag" style="clip-path: url(#clipPath);">
+    <g id="flag" :style="clipPathStyle">
       <g id="horizontal-movement" class="animated flag" stroke="none" :style="animationStyle">
         <path
           class="animated part"
@@ -25,19 +25,45 @@
 export default {
   name: 'Flag',
   components: {},
+  props: {
+    waveHeight: {
+      type: Number,
+      default () {
+        return 20
+      }
+    },
+    aspectRatio: {
+      type: Number,
+      default: function () {
+        return 0.666
+      }
+    },
+    partHeight: {
+      type: Number,
+      default: function () {
+        return 20
+      }
+    },
+    parts: {
+      type: Array,
+      default: function () {
+        return [
+          '#AE1C28',
+          '#FFFFFF',
+          '#21468B'
+        ]
+      }
+    }
+  },
   data: function () {
     return {
-      parts: [
-        '#AE1C28',
-        '#FFFFFF',
-        '#21468B'
-      ],
-      partHeight: 20,
-      waveHeight: 20,
       waveLength: 200, // should not touch this, keep it 200
-      aspectRatio: 0.666,
-      duration: 6000
+      duration: 5000,
+      id: null
     }
+  },
+  mounted: function () {
+    this.id = this._uid
   },
   computed: {
     partsData: function () {
@@ -160,10 +186,10 @@ export default {
 
       return parts
     },
-    svgHeight: function () {
+    clipHeight: function () {
       return this.flagHeight + 2 * this.waveHeight
     },
-    svgWidth: function () {
+    clipWidth: function () {
       return this.flagWidth
     },
     flagHeight: function () {
@@ -184,6 +210,12 @@ export default {
         '--waveheight-translation': `translateY(-${this.waveHeight}px)`,
         '--animation-duration': `${this.duration}ms`
       }
+    },
+    clipPathId: function () {
+      return 'clipPath-' + this.id
+    },
+    clipPathStyle: function () {
+      return `clip-path: url(#${this.clipPathId})`
     }
   }
 }

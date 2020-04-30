@@ -14,8 +14,8 @@
       :fill="groundColor"
     />
     <line
-      id="shadow"
-      x1="350"
+      id="groundShadow"
+      :x1="poleX"
       y1="495"
       x2="700"
       y2="495"
@@ -25,24 +25,43 @@
     />
     <line
       id="pole"
-      x1="350"
+      :x1="poleX"
       y1="150"
-      x2="350"
+      :x2="poleX"
       y2="500"
       :stroke="poleColor"
       :stroke-width="poleWidth"
     />
+    <line
+      id="poleShadow"
+      :x1="poleX+3*poleWidth/8"
+      y1="150"
+      :x2="poleX+3*poleWidth/8"
+      y2="500"
+      :stroke="poleShadowColor"
+      :stroke-width="poleWidth/4"
+      v-show="dayTime"
+    />
+    <g id="bushes">
+      <Bushes />
+    </g>
   </g>
 </template>
 
 <script>
+import Bushes from './Bushes'
+
 export default {
   name: 'Pole',
-  components: {},
+  components: {
+    Bushes
+  },
   data: function () {
     return {
+      poleX: 350,
       poleWidth: 10,
       poleColor: '#ffffff',
+      poleShadowColor: '#afafaf',
       groundColorDay: '#96d65b',
       groundColorNight: '#71a144',
       skyColorDay: '#9af5f0',
@@ -71,5 +90,11 @@ export default {
 </script>
 
 <style scoped>
-
+#bushes {
+  transform:
+    translateX(280px)
+    translateY(280px)
+    scaleX(-1)
+    scale(0.5);
+}
 </style>

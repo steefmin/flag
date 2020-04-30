@@ -31,6 +31,13 @@ export default {
         }
       }
 
+      if (false) {
+        return {
+          flagState: 'Raised with pennon',
+          background: 'day'
+        }
+      }
+
       return {
         flagState: 'Raised',
         background: 'day'
@@ -41,9 +48,9 @@ export default {
       const sunRise = new Date()
       const sunSet = new Date()
 
-      sunRise.setHours(8)
+      sunRise.setHours(6)
       sunRise.setMinutes(0)
-      sunSet.setHours(20)
+      sunSet.setHours(21)
       sunSet.setMinutes(0)
 
       if (now < sunRise) {
