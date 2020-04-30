@@ -21,7 +21,6 @@
       y2="495"
       :stroke="shadowColor"
       :stroke-width="shadowWidth"
-      v-show="dayTime"
     />
     <line
       id="pole"
@@ -40,7 +39,6 @@
       y2="500"
       :stroke="poleShadowColor"
       :stroke-width="poleWidth/4"
-      v-show="dayTime"
     />
     <g id="bushes">
       <Bushes />
@@ -63,7 +61,6 @@ export default {
       poleColor: '#ffffff',
       poleShadowColor: '#afafaf',
       groundColorDay: '#96d65b',
-      groundColorNight: '#71a144',
       skyColorDay: '#9af5f0',
       skyColorNight: '#415870',
       shadowColor: '#64A02B',
@@ -72,7 +69,10 @@ export default {
   },
   props: {
     nightTime: {
-      type: Boolean
+      type: Boolean,
+      default () {
+        return false
+      }
     }
   },
   computed: {
@@ -80,7 +80,7 @@ export default {
       return !this.nightTime
     },
     groundColor: function () {
-      return this.dayTime ? this.groundColorDay : this.groundColorNight
+      return this.dayTime ? this.groundColorDay : this.shadowColor
     },
     skyColor: function () {
       return this.dayTime ? this.skyColorDay : this.skyColorNight
