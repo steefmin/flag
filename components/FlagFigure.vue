@@ -23,7 +23,7 @@
       v-show="isHalfRaised"
     />
     <Wreath
-      v-show="isHalfRaised"
+      v-show="hasWreath"
     />
   </svg>
 </template>
@@ -34,7 +34,6 @@ import Pole from './Pole'
 import Wreath from './Wreath'
 
 const raisedState = 'Raised'
-const raidedWithPennonState = 'Raised with pennon'
 const halfRaisedState = 'HalfRaised'
 
 export default {
@@ -59,16 +58,26 @@ export default {
   props: {
     flagState: {
       type: String,
-      required: true
+      default () {
+        return raisedState
+      }
     },
     background: {
       type: String,
-      default: 'day'
+      default () {
+        return 'day'
+      }
+    },
+    foreground: {
+      type: Array,
+      default () {
+        return []
+      }
     }
   },
   computed: {
     isRaised: function () {
-      return [raisedState, raidedWithPennonState].includes(this.flagState)
+      return this.flagState === raisedState
     },
     isHalfRaised: function () {
       return this.flagState === halfRaisedState
@@ -77,7 +86,10 @@ export default {
       return this.background === 'night'
     },
     hasPennon: function () {
-      return this.flagState === raidedWithPennonState
+      return this.foreground.includes('pennon')
+    },
+    hasWreath: function () {
+      return this.foreground.includes('wreath')
     }
   }
 }
