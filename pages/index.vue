@@ -17,7 +17,8 @@ export default {
   data: function () {
     return {
       descriptions: {
-        sunDown: 'Er wordt niet gevlagd als de zon onder is.'
+        sunDown: 'Er wordt niet gevlagd als de zon onder is.',
+        DutchRoyalBirthday: 'Er is een jarige in het koninklijk huis.'
       }
     }
   },
@@ -34,7 +35,8 @@ export default {
       if (false) {
         return {
           flagState: 'Raised with pennon',
-          background: 'day'
+          background: 'day',
+          reason: 'DutchRoyalBirthday'
         }
       }
 

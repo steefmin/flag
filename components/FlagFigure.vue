@@ -22,12 +22,16 @@
       class="flag"
       v-show="isHalfRaised"
     />
+    <Wreath
+      v-show="isHalfRaised"
+    />
   </svg>
 </template>
 
 <script>
-import Flag from '~/components/Flag.vue'
-import Pole from '~/components/Pole'
+import Flag from './Flag.vue'
+import Pole from './Pole'
+import Wreath from './Wreath'
 
 const raisedState = 'Raised'
 const raidedWithPennonState = 'Raised with pennon'
@@ -36,6 +40,7 @@ const halfRaisedState = 'HalfRaised'
 export default {
   name: 'FlagFigure',
   components: {
+    Wreath,
     Flag,
     Pole
   },

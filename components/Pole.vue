@@ -93,7 +93,7 @@ export default {
 #bushes {
   transform:
     translateX(280px)
-    translateY(280px)
+    translateY(287px)
     scaleX(-1)
     scale(0.5);
 }
