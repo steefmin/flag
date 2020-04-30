@@ -1,21 +1,24 @@
 <template>
-  <svg
-    class="Flag"
-    :width="svgWidth"
-    :height="svgHeight"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <g class="animated flag" stroke="none" :style="animationStyle">
-      <path
-        class="animated part"
-        v-for="part in this.partsData"
-        :d="part.pathData"
-        :key="part.key"
-        :fill="part.color"
-        :style="animationStyle"
-      />
+  <g>
+    <defs>
+      <clipPath id="clipPath">
+        <rect x="0" y="0" :width="svgWidth" :height="svgHeight" />
+      </clipPath>
+    </defs>
+
+    <g id="flag" style="clip-path: url(#clipPath);">
+      <g id="horizontal-movement" class="animated flag" stroke="none" :style="animationStyle">
+        <path
+          class="animated part"
+          v-for="part in this.partsData"
+          :d="part.pathData"
+          :key="part.key"
+          :fill="part.color"
+          :style="animationStyle"
+        />
+      </g>
     </g>
-  </svg>
+  </g>
 </template>
 
 <script>

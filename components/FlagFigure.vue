@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <svg class="Figure" width="700" height="700" xmlns="http://www.w3.org/2000/svg">
     <Pole id="pole"/>
     <Flag id="raisedFlag" class="flag" v-show="isRaised"/>
     <Flag id="halfRaisedFlag" class="flag" v-show="isHalfRaised" />
-  </div>
+  </svg>
 </template>
 
 <script>
@@ -40,23 +40,39 @@ export default {
 </script>
 
 <style scoped>
-.flag {
-  position: absolute;
-  left: 353px;
-}
-
 #raisedFlag {
-  top: 132px;
+  transform: translate(352px, 132px);
 }
 
 #halfRaisedFlag {
-  top: 230px;
+  transform: translate(352px, 232px);
 }
 
-div{
-  position: absolute;
+svg {
+  border-radius: 700px;
 }
 
-#pole {
+@media screen and (max-width: 740px) {
+  svg {
+    transform: scale(0.8);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  svg {
+    transform: scale(0.6);
+  }
+}
+
+@media screen and (max-width: 460px) {
+  svg {
+    transform: scale(0.3);
+  }
+}
+
+@media screen and (max-width: 230px) {
+  svg {
+    transform: scale(0.1);
+  }
 }
 </style>
