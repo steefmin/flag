@@ -1,106 +1,72 @@
 <template>
   <div class="container">
-    <FlagFigure :flag-state="state.flagState" :background="state.background" :foreground="state.foreground"/>
+    <FlagFigure :flag-state="state.flagState" :background="state.background"/>
     <div id="description">
       {{ description }}
-    </div>
-    <div id="buttonbox">
-      <toggle-button
-        :value="settings.background"
-        :labels="{checked: 'Dag', unchecked: 'Nacht'}"
-        @change="settings.background = !settings.background"
-        width="150"
-        height="40"
-        font-size="16"
-      />
-      <toggle-button
-        :value="settings.flagState"
-        :labels="{checked: 'Vlag', unchecked: 'Geen vlag'}"
-        @change="settings.flagState = !settings.flagState"
-        width="150"
-        height="40"
-        font-size="16"
-      />
-      <toggle-button
-        :value="settings.inTop"
-        :labels="{checked: 'In top', unchecked: 'Half stok'}"
-        @change="settings.inTop = !settings.inTop"
-        width="150"
-        height="40"
-        font-size="16"
-      />
-      <toggle-button
-        :value="settings.pennon"
-        :labels="{checked: 'Wimpel', unchecked: 'Geen wimpel'}"
-        @change="settings.pennon = !settings.pennon"
-        width="150"
-        height="40"
-        font-size="16"
-      />
-      <toggle-button
-        :value="settings.wreath"
-        :labels="{checked: 'Krans', unchecked: 'Geen krans'}"
-        @change="settings.wreath = !settings.wreath"
-        width="150"
-        height="40"
-        font-size="16"
-      />
     </div>
   </div>
 </template>
 
 <script>
 import FlagFigure from '../components/FlagFigure'
-import { ToggleButton } from 'vue-js-toggle-button'
 
 export default {
   components: {
-    FlagFigure,
-    ToggleButton
+    FlagFigure
   },
   data: function () {
     return {
       descriptions: {
         sunDown: 'Er wordt niet gevlagd als de zon onder is.',
-        DutchRoyalBirthday: 'Er is een jarige in het koninklijk huis.'
-      },
-      settings: {
-        background: null,
-        flagState: false,
-        pennon: false,
-        inTop: true,
-        wreath: false
+        DutchRoyalBirthday: 'Er is een jarige in het koninklijk huis.',
+        remembranceDay: 'Vandaag worden alle oorlogsslachtoffers herdacht.',
+        liberationDay: 'De bevrijding aan het einde van de tweedewereldoorlog wordt gevierd.',
+        none: 'Er is vandaag niets aan het handje.'
       }
     }
   },
-  mounted () {
-    this.settings.background = !this.sunDown
-  },
   computed: {
     state: function () {
-      const state = {
-        background: this.settings.background ? 'day' : 'night',
-        flagState: 'Raised',
-        foreground: []
+      if (this.sunDown) {
+        return {
+          flagState: 'Lowered',
+          background: 'night',
+          reason: 'sunDown'
+        }
       }
 
-      if (this.settings.wreath) {
-        state.foreground.push('wreath')
+      if (this.royalBirthday) {
+        return {
+          flagState: 'Raised',
+          foreground: ['pennon'],
+          background: 'day',
+          reason: 'DutchRoyalBirthday'
+        }
       }
 
-      if (this.settings.pennon) {
-        state.foreground.push('pennon')
+      if (this.mayForth) {
+        return {
+          flagState: 'HalfRaised',
+          background: 'day',
+          foreground: ['wreath'],
+          reason: 'remembranceDay'
+        }
       }
 
-      if (!this.settings.inTop) {
-        state.flagState = 'HalfRaised'
+      if (this.mayFifth) {
+        return {
+          flagState: 'Raised',
+          background: 'day',
+          foreground: [],
+          reason: 'liberationDay'
+        }
       }
 
-      if (!this.settings.flagState) {
-        state.flagState = 'Lowered'
+      return {
+        flagState: 'Lowered',
+        background: 'day',
+        reason: 'none'
       }
-
-      return state
     },
     sunDown: function () {
       const now = new Date()
@@ -128,31 +94,56 @@ export default {
         return this.descriptions[reason] || ''
       }
       return ''
+    },
+    mayForth: function () {
+      const now = new Date()
+
+      if (now.getMonth() !== 4) {
+        return false
+      }
+
+      if (now.getDate() !== 4) {
+        return false
+      }
+
+      if (now.getHours() >= 18) {
+        return true
+      }
+
+      return false
+    },
+    mayFifth () {
+      const now = new Date()
+
+      if (now.getMonth() !== 4) {
+        return false
+      }
+
+      if (now.getDate() !== 5) {
+        return false
+      }
+
+      return true
+    },
+    royalBirthday () {
+      return false
     }
   }
 }
 </script>
 
 <style scoped>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+  .container {
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 
-#description {
-  margin: 10px;
-}
-
-#buttonbox {
-  width: 300px;
-}
-
-#buttonbox > * {
-  margin: 5px;
-}
+  #description {
+    margin: 10px;
+  }
 </style>

@@ -1,9 +1,6 @@
 <template>
   <div class="container">
     <FlagFigure :flag-state="state.flagState" :background="state.background" :foreground="state.foreground"/>
-    <div id="description">
-      {{ description }}
-    </div>
     <div id="buttonbox">
       <toggle-button
         :value="settings.background"
@@ -60,10 +57,6 @@ export default {
   },
   data: function () {
     return {
-      descriptions: {
-        sunDown: 'Er wordt niet gevlagd als de zon onder is.',
-        DutchRoyalBirthday: 'Er is een jarige in het koninklijk huis.'
-      },
       settings: {
         background: null,
         flagState: false,
@@ -121,13 +114,6 @@ export default {
       }
 
       return false
-    },
-    description: function () {
-      const reason = this.state.reason
-      if (reason) {
-        return this.descriptions[reason] || ''
-      }
-      return ''
     }
   }
 }
@@ -142,10 +128,6 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-#description {
-  margin: 10px;
 }
 
 #buttonbox {
