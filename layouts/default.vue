@@ -21,7 +21,7 @@
       </b-nav>
     </b-navbar>
     <b-popover target="bron" triggers="click" placement="top">
-      Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+      Some icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
     </b-popover>
   </div>
 </template>
