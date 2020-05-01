@@ -59,10 +59,15 @@ body {
   align-items: center;
 }
 
+
+</style>
+
+<style scoped>
 .footerElement {
   margin: 20px;
 }
-a, a:link, a:visited {
+
+.footerElement > a, a:link, a:visited {
   text-decoration: none;
   color: #fff;
 }

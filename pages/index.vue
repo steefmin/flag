@@ -14,6 +14,11 @@ export default {
   components: {
     FlagFigure
   },
+  head () {
+    return {
+      title: 'Online vlaggenmast'
+    }
+  },
   data: function () {
     return {
       descriptions: {
