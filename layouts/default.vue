@@ -15,9 +15,14 @@
 
     <b-navbar sticky="bottom" toggleable="true">
       <b-nav small align="end" class="w-100">
-        <b-nav-item href="https://steefmin.xyz">Door MINdustries</b-nav-item>
+        <b-nav-item id="bron"> Bron </b-nav-item>
+
+        <b-nav-item href="https://steefmin.xyz"> Door MINdustries </b-nav-item>
       </b-nav>
     </b-navbar>
+    <b-popover target="bron" triggers="click" placement="top">
+      Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+    </b-popover>
   </div>
 </template>
 

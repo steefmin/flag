@@ -47,7 +47,7 @@ export default {
     return {
       pennon: {
         parts: [
-          '#ff9600'
+          '#fd7e14'
         ],
         partHeight: 8,
         aspectRatio: 0.08,
@@ -109,6 +109,7 @@ export default {
 }
 
 svg {
+  margin-top: 100px;
   border-radius: 600px;
   max-width: 700px;
 }

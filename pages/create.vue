@@ -37,7 +37,7 @@
         :width=150
         :height=40
         :font-size=16
-        color="var(--info)"
+        color="var(--orange)"
       />
       <toggle-button
         :value="settings.wreath"
