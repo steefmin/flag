@@ -54,7 +54,7 @@
 
       <b-popover target="popover-link" triggers="click" placement="top">
         <template v-slot:title>Kopieer link</template>
-        <a :href="route">{{ fullLink }}</a>
+        <a :href="fullLink">{{ fullLink }}</a>
       </b-popover>
 
       <b-button
