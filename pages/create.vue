@@ -4,12 +4,13 @@
     <div id="switchBox" class="box">
       <b-form-input v-model="message" placeholder="Vandaag hijs ik de vlag omdat... "/>
       <toggle-button
-        :value="!sunDown"
+        :value="!isSunDown"
         :labels="{checked: 'Dag', unchecked: 'Nacht'}"
         @change="settings.background = !settings.background"
         :width=150
         :height=40
         :font-size=16
+        color="var(--info)"
       />
       <toggle-button
         :value="settings.flagState"
@@ -18,6 +19,7 @@
         :width=150
         :height=40
         :font-size=16
+        color="var(--info)"
       />
       <toggle-button
         :value="settings.inTop"
@@ -26,6 +28,7 @@
         :width=150
         :height=40
         :font-size=16
+        color="var(--info)"
       />
       <toggle-button
         :value="settings.pennon"
@@ -34,6 +37,7 @@
         :width=150
         :height=40
         :font-size=16
+        color="var(--info)"
       />
       <toggle-button
         :value="settings.wreath"
@@ -42,6 +46,7 @@
         :width=150
         :height=40
         :font-size=16
+        color="var(--info)"
       />
     </div>
     <div id="buttonBox" class="box">
@@ -94,7 +99,7 @@ export default {
     }
   },
   mounted () {
-    this.settings.background = !this.sunDown
+    this.settings.background = !this.sunDown(new Date())
   },
   computed: {
     state: function () {
@@ -122,6 +127,26 @@ export default {
 
       return state
     },
+    isSunDown () {
+      return this.sunDown(new Date())
+    },
+    emailHref () {
+      return `mailto:?body=${encodeURIComponent(this.fullLink)}`
+    },
+    fullLink () {
+      return `${window.location.origin}/${this.route()}`
+    }
+  },
+  methods: {
+    route () {
+      const payload = JSON.stringify(
+        {
+          state: this.state,
+          message: this.message
+        }
+      )
+      return `view?payload=${btoa(payload)}`
+    },
     sunDown: function () {
       const now = new Date()
       const sunRise = new Date()
@@ -141,21 +166,6 @@ export default {
       }
 
       return false
-    },
-    route () {
-      const payload = JSON.stringify(
-        {
-          state: this.state,
-          message: this.message
-        }
-      )
-      return `view?payload=${btoa(payload)}`
-    },
-    emailHref () {
-      return `mailto:?body=${encodeURIComponent(this.fullLink)}`
-    },
-    fullLink () {
-      return `${window.location.origin}/${this.route}`
     }
   }
 }

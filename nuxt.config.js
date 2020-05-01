@@ -47,7 +47,11 @@ export default {
     components: [
       'BButton',
       'BFormInput',
-      'BPopover']
+      'BNav',
+      'BNavbar',
+      'BNavItem',
+      'BPopover'
+    ]
   },
   /*
   ** Build configuration

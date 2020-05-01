@@ -32,7 +32,8 @@ export default {
   },
   computed: {
     state: function () {
-      if (this.sunDown) {
+      const now = new Date()
+      if (this.sunDown(now)) {
         return {
           flagState: 'Lowered',
           background: 'night',
@@ -40,7 +41,7 @@ export default {
         }
       }
 
-      if (this.royalBirthday) {
+      if (this.royalBirthday(now)) {
         return {
           flagState: 'Raised',
           foreground: ['pennon'],
@@ -49,7 +50,7 @@ export default {
         }
       }
 
-      if (this.mayForth) {
+      if (this.mayForth(now)) {
         return {
           flagState: 'HalfRaised',
           background: 'day',
@@ -58,7 +59,7 @@ export default {
         }
       }
 
-      if (this.mayFifth) {
+      if (this.mayFifth(now)) {
         return {
           flagState: 'Raised',
           background: 'day',
@@ -72,9 +73,39 @@ export default {
         background: 'day',
         reason: 'none'
       }
+    }
+  },
+  methods: {
+    mayForth: function (now) {
+      if (now.getMonth() !== 4) {
+        return false
+      }
+
+      if (now.getDate() !== 4) {
+        return false
+      }
+
+      if (now.getHours() >= 18) {
+        return true
+      }
+
+      return false
     },
-    sunDown: function () {
-      const now = new Date()
+    mayFifth (now) {
+      if (now.getMonth() !== 4) {
+        return false
+      }
+
+      if (now.getDate() !== 5) {
+        return false
+      }
+
+      return true
+    },
+    royalBirthday (now) {
+      return false
+    },
+    sunDown (now) {
       const sunRise = new Date()
       const sunSet = new Date()
 
@@ -91,46 +122,6 @@ export default {
         return true
       }
 
-      return false
-    },
-    description: function () {
-      const reason = this.state.reason
-      if (reason) {
-        return this.descriptions[reason] || ''
-      }
-      return ''
-    },
-    mayForth: function () {
-      const now = new Date()
-
-      if (now.getMonth() !== 4) {
-        return false
-      }
-
-      if (now.getDate() !== 4) {
-        return false
-      }
-
-      if (now.getHours() >= 18) {
-        return true
-      }
-
-      return false
-    },
-    mayFifth () {
-      const now = new Date()
-
-      if (now.getMonth() !== 4) {
-        return false
-      }
-
-      if (now.getDate() !== 5) {
-        return false
-      }
-
-      return true
-    },
-    royalBirthday () {
       return false
     }
   }

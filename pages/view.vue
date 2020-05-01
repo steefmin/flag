@@ -15,6 +15,8 @@
 import FlagFigure from '../components/FlagFigure'
 import { ToggleButton } from 'vue-js-toggle-button'
 
+const payloadStore = 'PayloadStore'
+
 export default {
   components: {
     FlagFigure,
@@ -32,20 +34,23 @@ export default {
           flagState: 'Lowered',
           foreground: [],
           background: 'day'
-        },
-        message: 'test'
+        }
       }
     }
   },
   created() {
-    const payload = this.$route.query.payload
+    let payload = this.$route.query.payload
+
+    if (!payload) {
+      payload = localStorage.getItem(payloadStore)
+    }
+
     try {
       this.payload = JSON.parse(atob(payload))
+      localStorage.setItem(payloadStore, payload)
     } catch (e) {
       // do nothing, fallback to default values
     }
-  },
-  computed: {
   }
 }
 </script>
