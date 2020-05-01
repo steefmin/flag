@@ -5,11 +5,19 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'Online vlaggenmast',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { name: 'title', content: 'Online vlaggenmast'},
+      { hid: 'description', name: 'description', content: '' },
+
+      { property: 'og:type', content: 'website'},
+      { property: 'og:url', content: 'https://vlag.steefmin.xyz/'},
+      { property: 'og:title', content: 'Online vlaggenmast'},
+
+      { property: 'twitter:url', content: 'https://vlag.steefmin.xyz/'},
+      { property: 'twitter:title', content: 'Online vlaggenmast'},
     ],
     link: [
       { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
