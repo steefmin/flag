@@ -43,6 +43,12 @@ export default {
   modules: [
     'bootstrap-vue/nuxt'
   ],
+  bootstrapVue: {
+    components: [
+      'BButton',
+      'BFormInput',
+      'BPopover']
+  },
   /*
   ** Build configuration
   */

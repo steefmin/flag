@@ -70,15 +70,11 @@
 <script>
 import FlagFigure from '../components/FlagFigure'
 import { ToggleButton } from 'vue-js-toggle-button'
-import { BButton, BPopover} from 'bootstrap-vue'
-
 
 export default {
   components: {
     FlagFigure,
     'toggle-button': ToggleButton,
-    'b-button': BButton,
-    'b-popover': BPopover
   },
   head () {
     return {
