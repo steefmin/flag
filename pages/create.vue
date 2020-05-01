@@ -172,19 +172,21 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
 .box {
   width: 500px;
   margin: 5px;
+}
+
+@media screen and (max-width: 520px) {
+  .box {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .box {
+    width: 300px;
+  }
 }
 
 #switchBox {

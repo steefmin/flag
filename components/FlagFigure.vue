@@ -1,5 +1,5 @@
 <template>
-  <svg class="Figure" width="700" height="700" xmlns="http://www.w3.org/2000/svg">
+  <svg class="Figure" viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg">
     <Pole
       id="pole"
       :nightTime="night"
@@ -109,30 +109,6 @@ export default {
 }
 
 svg {
-  border-radius: 700px;
-}
-
-@media screen and (max-width: 740px) {
-  svg {
-    transform: scale(0.8);
-  }
-}
-
-@media screen and (max-width: 600px) {
-  svg {
-    transform: scale(0.6);
-  }
-}
-
-@media screen and (max-width: 460px) {
-  svg {
-    transform: scale(0.3);
-  }
-}
-
-@media screen and (max-width: 230px) {
-  svg {
-    transform: scale(0.1);
-  }
+  border-radius: 600px;
 }
 </style>

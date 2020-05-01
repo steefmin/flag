@@ -10,7 +10,7 @@
       id="ground"
       y="450"
       width="700"
-      height="700"
+      height="250"
       :fill="groundColor"
     />
     <line
