@@ -54,7 +54,7 @@
         id="popover-link"
         variant="info"
       >
-        Create link
+        Maak link
       </b-button>
 
       <b-popover target="popover-link" triggers="click" placement="top">
@@ -66,7 +66,7 @@
         :href="emailHref"
         variant="info"
       >
-        Create email
+        Stuur als email
       </b-button>
     </div>
   </div>
