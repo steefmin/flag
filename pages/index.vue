@@ -26,7 +26,7 @@ export default {
         DutchRoyalBirthday: 'Er is een jarige in het koninklijk huis.',
         remembranceDay: 'Vandaag worden alle oorlogsslachtoffers herdacht.',
         liberationDay: 'De bevrijding aan het einde van de tweedewereldoorlog wordt gevierd.',
-        none: 'Er is vandaag niets aan het handje.'
+        none: 'Er is vandaag niets aan de hand.'
       }
     }
   },
@@ -73,6 +73,13 @@ export default {
         background: 'day',
         reason: 'none'
       }
+    },
+    description: function () {
+      const reason = this.state.reason
+      if (reason) {
+        return this.descriptions[reason] || ''
+      }
+      return ''
     }
   },
   methods: {
