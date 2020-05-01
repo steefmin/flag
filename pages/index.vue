@@ -92,11 +92,14 @@ export default {
         return false
       }
 
-      if (now.getHours() >= 18) {
-        return true
-      }
+      // Disabled this rule for this year (2020)
+      // as a special instruction was sent out:
+      // https://www.rijksoverheid.nl/actueel/nieuws/2020/04/17/vlaginstructie-bij-herdenking-slachtoffers-tweede-wereldoorlog-op-4-mei-2020
+      // if (now.getHours() < 18) {
+      //   return false
+      // }
 
-      return false
+      return true
     },
     mayFifth (now) {
       if (now.getMonth() !== 4) {
