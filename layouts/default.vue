@@ -13,7 +13,7 @@
 
     <nuxt id="main"/>
 
-    <b-navbar sticky="bottom" toggleable="true">
+    <b-navbar sticky toggleable>
       <b-nav small align="end" class="w-100">
         <b-nav-item id="bron"> Bron </b-nav-item>
 
