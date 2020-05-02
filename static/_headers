@@ -1,0 +1,13 @@
+/*
+  cache-control: public
+
+/*.js
+  cache-control: immutable
+  cache-control: max-age=2592000
+
+/*.png
+  cache-control: max-age=86400
+
+/*.ico
+  cache-control: max-age=86400
+
