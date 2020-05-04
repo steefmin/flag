@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <FlagFigure :flag-state="state.flagState" :background="state.background"/>
+    <FlagFigure :flag-state="state.flagState" :background="state.background" :foreground="state.foreground"/>
     <div id="description">
       {{ description }}
     </div>
