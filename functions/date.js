@@ -35,6 +35,16 @@ const sundown = (now) => {
   return false
 }
 
+async function getDateDoc(documentPath) {
+  const dateRef = db.collection('date').doc(documentPath)
+  return await dateRef.get();
+}
+
+async function getTypeDoc(type) {
+  const typeRef = db.collection('day-type').doc(type)
+  return await typeRef.get();
+}
+
 export async function handler(event) {
   if (event.httpMethod !== 'GET') {
     console.log(`--> method not supported`)
@@ -52,29 +62,42 @@ export async function handler(event) {
         foreground: [],
         background: 'night'
       }
-      )}
+    )}
   }
 
-  const documentPath = formatDate(date);
-
-  const ref = db.collection('date').doc(documentPath)
-  const doc = await ref.get()
-
-  if (!doc.exists) {
-    console.log(`--> document ${documentPath} not found in firestore`)
-    return {statusCode: 200, body: JSON.stringify(
+  const fallbackResponse = {
+    statusCode: 200,
+    body: JSON.stringify(
       {
         description: 'Er is vandaag geen reden om de vlag te voeren.',
         flagState: 'Lowered',
         foreground: [],
         background: 'day'
       }
-      )}
+    )
+  };
+
+  const documentPath = formatDate(date);
+
+  const dateDoc = await getDateDoc(documentPath);
+
+  if (!dateDoc.exists) {
+    console.log(`--> document ${documentPath} not found in firestore`)
+    return fallbackResponse
   }
 
-  console.log(`--> document ${documentPath} found, returning data`)
+  console.log(`--> document ${documentPath} found, querying type data`)
+
+  const type = dateDoc.data().type;
+  const typeDoc = await getTypeDoc(type);
+
+  if (!typeDoc.exists) {
+    console.log(`---> no data found for type: ${type}`)
+    return fallbackResponse
+  }
+
   return {
     statusCode: 200,
-    body: JSON.stringify(doc.data())
+    body: JSON.stringify(typeDoc.data())
   }
 }
