@@ -1,8 +1,18 @@
 <template>
   <div class="container">
-    <FlagFigure :flag-state="this.flag.flagState" :background="this.flag.background" :foreground="this.flag.foreground"/>
+    <transition
+      appear
+      name="fade"
+    >
+      <FlagFigure
+        v-if="flag"
+        :flag-state="flag.flagState"
+        :background="flag.background"
+        :foreground="flag.foreground"
+      />
+    </transition>
     <div id="description">
-      {{ this.flag.description }}
+      {{ flag.description }}
     </div>
   </div>
 </template>
@@ -21,7 +31,7 @@ export default {
   },
   data: function () {
     return {
-      flag: {},
+      flag: false,
     }
   },
   async fetch() {
@@ -33,5 +43,20 @@ export default {
 <style scoped>
   #description {
     margin: 10px;
+  }
+
+  .fade-enter-active {
+    animation-name: open;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+  }
+
+  @keyframes open {
+    0% {
+      clip-path: circle(0%);
+    }
+    100% {
+      clip-path: circle(100%);
+    }
   }
 </style>
