@@ -48,21 +48,30 @@ async function getTypeDoc(type) {
 export async function handler(event) {
   if (event.httpMethod !== 'GET') {
     console.log(`--> method not supported`)
-    return {statusCode: 405, body: JSON.stringify({error: 'Method not allowed'})}
+    return {
+      statusCode: 405,
+      body: JSON.stringify({error: 'Method not allowed'}),
+      headers: {'Cache-Control': 'public, max-age=3600, immutable'}}
   }
 
   const date = new Date()
 
   if (sundown(date)) {
     console.log(`--> sun is down`)
-    return {statusCode: 200, body: JSON.stringify(
-      {
-        description: 'Er wordt niet gevlagd als de zon onder is.',
-        flagState: 'Lowered',
-        foreground: [],
-        background: 'night'
+    return {
+      statusCode: 200,
+      body: JSON.stringify(
+        {
+          description: 'Er wordt niet gevlagd als de zon onder is.',
+          flagState: 'Lowered',
+          foreground: [],
+          background: 'night'
+        },
+      ),
+      headers: {
+        'Cache-Control': 'public, max-age=3600, immutable',
       }
-    )}
+    }
   }
 
   const fallbackResponse = {
@@ -74,7 +83,10 @@ export async function handler(event) {
         foreground: [],
         background: 'day'
       }
-    )
+    ),
+    headers: {
+      'Cache-Control': 'public, max-age=3600, immutable',
+    }
   };
 
   const documentPath = formatDate(date);
@@ -98,6 +110,10 @@ export async function handler(event) {
 
   return {
     statusCode: 200,
-    body: JSON.stringify(typeDoc.data())
+    body: JSON.stringify(typeDoc.data()),
+    headers: {
+      'Cache-Control': 'public, max-age=3600, immutable',
+    }
   }
 }
+
