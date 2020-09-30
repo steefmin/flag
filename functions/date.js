@@ -51,7 +51,7 @@ export async function handler(event) {
     return {
       statusCode: 405,
       body: JSON.stringify({error: 'Method not allowed'}),
-      headers: {'Cache-Control': 'public, max-age=3600, immutable'}}
+      headers: {'Cache-Control': 'public, max-age=604800'}}
   }
 
   const date = new Date()
@@ -69,7 +69,7 @@ export async function handler(event) {
         },
       ),
       headers: {
-        'Cache-Control': 'public, max-age=3600, immutable',
+        'Cache-Control': 'public, max-age=3600',
       }
     }
   }
@@ -85,7 +85,7 @@ export async function handler(event) {
       }
     ),
     headers: {
-      'Cache-Control': 'public, max-age=3600, immutable',
+      'Cache-Control': 'public, max-age=3600',
     }
   };
 
@@ -112,7 +112,7 @@ export async function handler(event) {
     statusCode: 200,
     body: JSON.stringify(typeDoc.data()),
     headers: {
-      'Cache-Control': 'public, max-age=3600, immutable',
+      'Cache-Control': 'public, max-age=3600',
     }
   }
 }
