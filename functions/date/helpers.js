@@ -4,10 +4,12 @@ const loadConfig = (envData) => {
     apiKey: envData.apiKey,
     projectId: envData.projectId,
   }
-
+  console.log(env)
   if (env.apiKey === undefined || env.projectId === undefined) {
+    console.log('loading from file')
     return require('./firebaseConfig')
   }
+  console.log('loading from env')
   return env
 }
 
