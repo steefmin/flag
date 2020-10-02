@@ -17,16 +17,19 @@ This custom set will be displayed on the `/view` page, which will decode the pay
 # install dependencies
 $ npm install
 
-# serve with hot reload at localhost:3000
+# serve with hot reload at localhost
 $ npm run dev
 ```
 
+It is recommended to develop this project with `netlify dev` command from [Netlify cli](https://github.com/netlify/cli) package.
+This enables you to also run the (AWS Lambda) functions locally. Which makes development a breeze. 
+
 This project is set up as a JAM stack. So to deploy to production, the static assets will need to be built.
 ```
-# generate static project
+# generate static project and compile functions
 $ npm run generate
 ```
 
-The results will by default be exposed in `/dist`. 
+The results will by default be exposed in `/dist` and the functions in `/functions-dist`. 
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
