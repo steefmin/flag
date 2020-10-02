@@ -1,13 +1,15 @@
 const loadConfig = () => {
-  try {
-    return require('./firebaseConfig')
-  } catch {
-    return {
-      apiKey: process.env.apiKey,
-      projectId: process.env.projectId,
-    }
+  const env = {
+    apiKey: process.env.apiKey,
+    projectId: process.env.projectId,
   }
+
+  if (env.apiKey === undefined && env.projectId === undefined) {
+    return require('./firebaseConfig')
+  }
+  return env
 }
+
 
 const formatDate = (date) => {
   const year = date.getFullYear().toString()
