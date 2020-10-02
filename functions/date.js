@@ -47,4 +47,3 @@ export async function handler(event) {
 
   return response.success(typeDoc.data())
 }
-
