@@ -1,7 +1,7 @@
-const loadConfig = () => {
+const loadConfig = (processData) => {
   const env = {
-    apiKey: process.env.apiKey,
-    projectId: process.env.projectId,
+    apiKey: processData.env.apiKey,
+    projectId: processData.env.projectId,
   }
 
   if (env.apiKey === undefined && env.projectId === undefined) {
