@@ -1,0 +1,4 @@
+exports.config = {
+  apiKey: '<<YOUR KEY HERE>>',
+  projectId: '<<YOUR PROJECT ID HERE>>'
+}
