@@ -1,10 +1,11 @@
-const loadConfig = (processData) => {
+const loadConfig = (envData) => {
+  console.log(envData)
   const env = {
-    apiKey: processData.env.apiKey,
-    projectId: processData.env.projectId,
+    apiKey: envData.apiKey,
+    projectId: envData.projectId,
   }
 
-  if (env.apiKey === undefined && env.projectId === undefined) {
+  if (env.apiKey === undefined || env.projectId === undefined) {
     return require('./firebaseConfig')
   }
   return env
