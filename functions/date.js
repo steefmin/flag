@@ -27,24 +27,21 @@ export async function handler(event) {
   }
 
   const date = new Date()
-
   if (helpers.sundown(date)) {
     return response.sundown
   }
 
-  const documentPath = helpers.formatDate(date);
-  const dateDoc = await getDateDoc(documentPath);
-
+  const dateDoc = await getDateDoc(helpers.formatDate(date))
   if (!dateDoc.exists) {
     return response.fallback
   }
 
-  const type = dateDoc.data().type;
-  const typeDoc = await getTypeDoc(type);
-
+  const typeDoc = await getTypeDoc(dateDoc.data().type)
   if (!typeDoc.exists) {
     return response.fallback
   }
 
-  return response.success(typeDoc.data())
+  return response.success(
+    typeDoc.data()
+  )
 }
