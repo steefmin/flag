@@ -10,16 +10,18 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'title', content: 'Online vlaggenmast'},
-      { hid: 'description', name: 'description', content: '' },
+      { name: 'description', content: 'We vlaggen voor elke nationale vlag dag. Of maak je eigen om te delen met vrienden of familie.' },
 
       { property: 'og:type', content: 'website'},
       { property: 'og:url', content: 'https://vlag.steefmin.xyz/'},
       { property: 'og:title', content: 'Online vlaggenmast'},
       { property: 'og:image', content: 'https://vlag.steefmin.xyz/android-chrome-512x512.png' },
+      { property: 'og:description', content: 'We vlaggen voor elke nationale vlag dag. Of maak je eigen om te delen met vrienden of familie.' },
 
       { property: 'twitter:url', content: 'https://vlag.steefmin.xyz/'},
       { property: 'twitter:title', content: 'Online vlaggenmast'},
       { property: 'twitter:image', content: 'https://vlag.steefmin.xyz/android-chrome-512x512.png' },
+      { property: 'twitter:description', content: 'We vlaggen voor elke nationale vlag dag. Of maak je eigen om te delen met vrienden of familie.' },
     ],
     link: [
       { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
