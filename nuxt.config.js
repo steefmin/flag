@@ -15,9 +15,11 @@ export default {
       { property: 'og:type', content: 'website'},
       { property: 'og:url', content: 'https://vlag.steefmin.xyz/'},
       { property: 'og:title', content: 'Online vlaggenmast'},
+      { property: 'og:image', content: 'https://vlag.steefmin.xyz/android-chrome-512x512.png' },
 
       { property: 'twitter:url', content: 'https://vlag.steefmin.xyz/'},
       { property: 'twitter:title', content: 'Online vlaggenmast'},
+      { property: 'twitter:image', content: 'https://vlag.steefmin.xyz/android-chrome-512x512.png' },
     ],
     link: [
       { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
