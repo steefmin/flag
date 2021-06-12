@@ -5,8 +5,9 @@ const helpers = require('./date/helpers')
 const response = require('./date/responses')
 
 if (!firebase.apps.length) {
+  let options = helpers.loadConfig(process.env);
   firebase.default.initializeApp(
-    helpers.loadConfig(process.env)
+    options.config
   )
 }
 const db = firebase.default.firestore()
