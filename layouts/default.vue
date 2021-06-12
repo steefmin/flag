@@ -1,9 +1,6 @@
 <template>
   <div id="box">
     <b-navbar class="row" fixed="top" toggleable="md">
-      <b-nav pills class="col w-100">
-        <b-nav-item  to="/" active><h1>Online vlaggenmast</h1></b-nav-item>
-      </b-nav>
       <b-nav pills align="end" class="col">
         <b-nav-item class="m-2" to="/" exact active-class="active">Home</b-nav-item>
         <b-nav-item class="m-2" to="/create"  active-class="active">Maak</b-nav-item>
