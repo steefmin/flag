@@ -5,7 +5,8 @@ const loadConfig = (envData) => {
   }
 
   if (env.apiKey === undefined || env.projectId === undefined) {
-    return require('./firebaseConfig')
+    const configFile = require('./firebaseConfig')
+    return configFile.config
   }
 
   return env

@@ -25,6 +25,7 @@ export async function handler(event) {
   if (event.httpMethod !== 'GET') {
     return response.methodNotAllowed
   }
+  return response.fallback
 
   const date = new Date()
   if (helpers.sundown(date)) {

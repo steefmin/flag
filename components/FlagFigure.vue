@@ -22,9 +22,11 @@
       class="flag"
       v-show="isHalfRaised"
     />
+    <Backpack />
     <Wreath
       v-show="hasWreath"
     />
+    <GraduationHat />
   </svg>
 </template>
 
@@ -32,6 +34,8 @@
 import Flag from './Flag.vue'
 import Pole from './Pole'
 import Wreath from './Wreath'
+import Backpack from "@/components/Backpack";
+import GraduationHat from "@/components/GraduationHat";
 
 const raisedState = 'Raised'
 const halfRaisedState = 'HalfRaised'
@@ -39,6 +43,8 @@ const halfRaisedState = 'HalfRaised'
 export default {
   name: 'FlagFigure',
   components: {
+    GraduationHat,
+    Backpack,
     Wreath,
     Flag,
     Pole
